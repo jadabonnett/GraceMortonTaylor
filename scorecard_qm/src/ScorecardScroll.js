@@ -27,8 +27,8 @@ behavior: 'smooth',
 
 export default function ScrollingTable() {
     return (
-        <div>
-            <table>
+        <div className="horizontal-scroll-container">
+            <table className="horizontal-scroll-content">
                 <tr>
                     <td>< ScorecardColumn /></td>
                     <td>< ScorecardColumn /></td>
@@ -47,7 +47,6 @@ export default function ScrollingTable() {
                     <td>< ScorecardColumn /></td>
                 </tr>
             </table>
-            
         </div>
     );
 }
