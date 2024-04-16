@@ -18,6 +18,7 @@ export function ScorecardColumn() {
   const [teamBScore, setTeamBScore] = useState(S.teamB.score);
   const [teamBFouls, setTeamBFoulCount] = useState(S.teamB.fouls);
   const [teamBTimeouts, setTeamBTimeouts] = useState(S.teamB.timeouts);
+  const [isScoreSelected, setIsScoreSelected] = useState(false);
   let questionNumber = 1
   let questionsByNumber = [];
 
@@ -66,6 +67,7 @@ export function ScorecardColumn() {
     } else {
       setTeamBScore(team.score);
     }
+    setIsScoreSelected(true);
     let foulBool = false
     var selectorQ = document.getElementById("QuestionType");
     //var newQuestion = new Question(questionNumber, team.name, currentQuizzer.name, val, selectorQ.value, foulBool);// need to figure out foul bool
@@ -185,7 +187,9 @@ export function ScorecardColumn() {
             </td>
           </tr>
           <tr>
-            <td>###</td>
+            <td>
+              {isScoreSelected ? teamAScore : "Select a score"}
+            </td>
           </tr>
         </tbody>
       </table>
