@@ -2,7 +2,7 @@
 
 1. make sure you are in the backend folder
 
-2. run ```npm instal```, this will install all dependencies
+2. run ```npm install```, this will install all dependencies
 **DO NOT PUSH A NODE_MODULES FOLDER TO THE REPO**
 
 3. You will need to talk to Dayne about setting up a user with MongoDB. You cannot setup
