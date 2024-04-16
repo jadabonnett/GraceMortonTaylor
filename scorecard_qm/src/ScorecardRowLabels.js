@@ -12,9 +12,6 @@ function RowLabels () {
       </thead>
       <tbody>
         <tr>
-          <td>Player Name</td>
-        </tr>
-        <tr>
           <td class="labels" >Type</td>
         </tr>
         <tr>

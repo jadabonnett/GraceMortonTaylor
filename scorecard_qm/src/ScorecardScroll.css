@@ -2,7 +2,7 @@
     margin: auto;
     overflow-x: auto; /* Hide the default scrollbar */
     white-space: nowrap; /* Prevent content from wrapping */
-    border: 1.5px solid #ddd;
+    outline: 1.5px solid #ddd;
   }
   
   .horizontal-scroll-content {
