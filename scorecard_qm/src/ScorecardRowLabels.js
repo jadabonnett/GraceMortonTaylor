@@ -4,27 +4,29 @@ import './App.css';
 function RowLabels () {
   return (
     <div className="table-container">
-    <table id="table_labels">
-      <thead>
-        <tr>
-          <th></th>
-        </tr>
-      </thead>
+    <table id="table_labels" >
+      
       <tbody>
         <tr>
-          <td>Player Name</td>
+          <td class="labels">Question</td>
         </tr>
         <tr>
-          <td>Points</td>
+          <td class="labels" >Type</td>
         </tr>
         <tr>
-          <td>Team Bonus</td>
+          <td class="labels">Name</td>
         </tr>
         <tr>
-          <td>Team Errors</td>
+          <td class="labels">Points</td>
+        </tr>
+        <tr >
+          <td class="labels">Bonus</td>
         </tr>
         <tr>
-          <td>Running Total</td>
+          <td class="labels">Errors</td>
+        </tr>
+        <tr >
+          <td class="labels">Total</td>
         </tr>
       </tbody>
     </table>

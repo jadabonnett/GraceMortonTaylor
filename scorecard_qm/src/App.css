@@ -46,5 +46,10 @@ select {
 
 .table-container {
   flex: 1;
-  max-width: 50%;
+  max-width: 40%;
+  padding-top: 2.5%;
+}
+.labels{
+  padding: 13.5%;
+  
 }
