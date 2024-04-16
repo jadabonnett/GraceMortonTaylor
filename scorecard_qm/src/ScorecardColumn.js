@@ -152,10 +152,9 @@ export function ScorecardColumn() {
           </tr>
           <tr>
             <td>
-              <select
-                onClick={() => S.teamA.players.forEach(setListA)}
-                id="TeamAPlayers"
-                defaultValue={"---"}>
+             <select
+                onClick={() => setListA(S.teamA.players)}
+                id="TeamAPlayers">
                 <option id="unselected" value="---">---</option>
               </select>
             </td>

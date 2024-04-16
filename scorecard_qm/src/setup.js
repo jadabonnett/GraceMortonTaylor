@@ -45,8 +45,12 @@
 
   export function setListA(players){
     let dropdown = document.getElementById("TeamAPlayers");
-    var opt = document.createElement("option"); 
-    opt.text = players.name;
-    opt.value = players.name
-    dropdown.options.add(opt);
-  }
+        if (dropdown.options.length <= 1) {
+        players.forEach(player => {
+            var opt = document.createElement("option"); 
+            opt.text = player.name;
+            opt.value = player.name;
+            dropdown.appendChild(opt);
+        });
+    }
+}
