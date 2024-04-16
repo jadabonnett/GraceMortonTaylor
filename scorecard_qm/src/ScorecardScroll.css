@@ -1,5 +1,4 @@
 .horizontal-scroll-container {
-    padding: 5px;
     margin: auto;
     overflow-x: auto; /* Hide the default scrollbar */
     white-space: nowrap; /* Prevent content from wrapping */

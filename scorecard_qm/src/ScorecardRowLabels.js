@@ -4,11 +4,15 @@ import './App.css';
 function RowLabels () {
   return (
     <div className="table-container">
-    <table id="table_labels" >
-      
+    <table id="table_labels">
+      <thead>
+        <tr>
+          <th>Question #</th>
+        </tr>
+      </thead>
       <tbody>
         <tr>
-          <td class="labels">Question</td>
+          <td>Player Name</td>
         </tr>
         <tr>
           <td class="labels" >Type</td>

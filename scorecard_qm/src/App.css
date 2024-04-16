@@ -19,7 +19,7 @@ table {
 th, td {
   border: 1px solid #ddd; /* Add a border around each cell */
   padding: 8px;
-  text-align: left;
+  text-align: center;
 }
 
 /* Style for table headers */
@@ -41,7 +41,15 @@ select {
 
 .App {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+}
+
+.scorecard {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: left;
+  padding: 10px;
 }
 
 .table-container {
@@ -53,3 +61,5 @@ select {
   padding: 13.5%;
  
 }
+
+

@@ -9,8 +9,10 @@ function App() {
   return (
     <div className="App">
       < QuestionCounter />
-      < RowLabels />
-      < ScrollingTable />
+      <div className="scorecard">
+        < RowLabels />
+        < ScrollingTable />
+      </div>
     </div>
   );
 }
