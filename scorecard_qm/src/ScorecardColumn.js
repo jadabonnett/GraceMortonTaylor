@@ -155,7 +155,7 @@ export function ScorecardColumn() {
             <td>
               <select disabled={otherStuffDisabled}>
                 <option id="unselected" value="---">
-                  Question Type
+                   Type
                 </option>
                 <option value="FTV-Quote">FTV-First Words</option>
                 <option value="FTV-Quote">FTV-Quote</option>
@@ -170,14 +170,18 @@ export function ScorecardColumn() {
              <select
                 onClick={() => setListA(S.teamA.players)}
                 id="TeamAPlayers" disabled={otherStuffDisabled}>
-                <option id="unselected" value="---">Player</option>
+                <option id="unselected" value="---">
+                    Name
+                </option>
               </select>
             </td>
           </tr>
           <tr>
             <td>
               <select onChange={() => handlePoints(S.teamA)}id="pointsDropdown" defaultValue={"---"} disabled={otherStuffDisabled}>
-                <option id="unselected" value="---">Points</option>
+                <option id="unselected" value="---">
+                  Points
+                </option>
                 <option value="+10">+10</option>
                 <option value="+20">+20</option>
                 <option value="-10">-10</option>
