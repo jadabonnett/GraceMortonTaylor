@@ -1,6 +1,5 @@
 import './App.css';
 import QuestionCounter from './QuestionCounter';
-import RowLabels from './ScorecardRowLabels';
 import ScrollingTable from './ScorecardScroll';
 import './setup.js'
 
@@ -10,7 +9,6 @@ function App() {
     <div className="App">
       < QuestionCounter />
       <div className="scorecard">
-        < RowLabels />
         < ScrollingTable />
       </div>
     </div>
