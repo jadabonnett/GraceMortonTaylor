@@ -155,7 +155,7 @@ export function ScorecardColumn() {
             <td>
               <select disabled={otherStuffDisabled}>
                 <option id="unselected" value="---">
-                  ---
+                  Question Type
                 </option>
                 <option value="FTV-Quote">FTV-First Words</option>
                 <option value="FTV-Quote">FTV-Quote</option>
@@ -170,14 +170,14 @@ export function ScorecardColumn() {
              <select
                 onClick={() => setListA(S.teamA.players)}
                 id="TeamAPlayers" disabled={otherStuffDisabled}>
-                <option id="unselected" value="---">---</option>
+                <option id="unselected" value="---">Player</option>
               </select>
             </td>
           </tr>
           <tr>
             <td>
               <select onChange={() => handlePoints(S.teamA)}id="pointsDropdown" defaultValue={"---"} disabled={otherStuffDisabled}>
-                <option id="unselected" value="---">---</option>
+                <option id="unselected" value="---">Points</option>
                 <option value="+10">+10</option>
                 <option value="+20">+20</option>
                 <option value="-10">-10</option>
@@ -189,7 +189,7 @@ export function ScorecardColumn() {
             <td>
               <select defaultValue={"---"} disabled={otherStuffDisabled}>
                 <option id="unselected" value="---">
-                  ---
+                  Bonus
                 </option>
                 <option>Bonus val</option>
               </select>
@@ -206,7 +206,7 @@ export function ScorecardColumn() {
             </td>
           </tr>
           <tr>
-          <tr>
+            <tr>
               <button onClick={handleConfirmClick} disabled={confirmClicked}>{confirmClicked? "Confirmed": "Confirm?"}</button>
               <button onClick={handleEditClick} disabled={editClicked}>{editClicked ? "Editing": "Edit"}</button>
             </tr>
