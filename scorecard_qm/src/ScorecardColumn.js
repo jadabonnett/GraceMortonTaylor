@@ -19,6 +19,21 @@ export function ScorecardColumn() {
   const [teamBFouls, setTeamBFoulCount] = useState(S.teamB.fouls);
   const [teamBTimeouts, setTeamBTimeouts] = useState(S.teamB.timeouts);
   const [isScoreSelected, setIsScoreSelected] = useState(false);
+  const [confirmClicked, setConfirmClicked] = useState(false);
+  const [editClicked, setEditClicked] = useState(true); // Edit button is initially lit up
+  const [otherStuffDisabled, setOtherStuffDisabled] = useState(false);
+  const handleConfirmClick= () =>{
+    setConfirmClicked(true);
+    setEditClicked(false);
+    setOtherStuffDisabled(true);
+  }
+
+  const handleEditClick = () => {
+    setEditClicked(true);
+    setConfirmClicked(false);
+    setOtherStuffDisabled(false);
+  };
+
   let questionNumber = 1
   let questionsByNumber = [];
 
@@ -138,7 +153,7 @@ export function ScorecardColumn() {
         <tbody>
           <tr>
             <td>
-              <select>
+              <select disabled={otherStuffDisabled}>
                 <option id="unselected" value="---">
                   ---
                 </option>
@@ -154,14 +169,14 @@ export function ScorecardColumn() {
             <td>
              <select
                 onClick={() => setListA(S.teamA.players)}
-                id="TeamAPlayers">
+                id="TeamAPlayers" disabled={otherStuffDisabled}>
                 <option id="unselected" value="---">---</option>
               </select>
             </td>
           </tr>
           <tr>
             <td>
-              <select onChange={() => handlePoints(S.teamA)}id="pointsDropdown" defaultValue={"---"}>
+              <select onChange={() => handlePoints(S.teamA)}id="pointsDropdown" defaultValue={"---"} disabled={otherStuffDisabled}>
                 <option id="unselected" value="---">---</option>
                 <option value="+10">+10</option>
                 <option value="+20">+20</option>
@@ -172,7 +187,7 @@ export function ScorecardColumn() {
           </tr>
           <tr>
             <td>
-              <select defaultValue={"---"}>
+              <select defaultValue={"---"} disabled={otherStuffDisabled}>
                 <option id="unselected" value="---">
                   ---
                 </option>
@@ -182,13 +197,19 @@ export function ScorecardColumn() {
           </tr>
           <tr>
             <td>
-              <button onClick={() => handleFoulButtonClick(S.teamA)} id="table_button">Add Foul</button>
+              <button onClick={() => handleFoulButtonClick(S.teamA)} id="table_button" disabled={otherStuffDisabled}>Add Foul</button >
             </td>
           </tr>
           <tr>
             <td>
               {isScoreSelected ? teamAScore : "Select a score"}
             </td>
+          </tr>
+          <tr>
+          <tr>
+              <button onClick={handleConfirmClick} disabled={confirmClicked}>{confirmClicked? "Confirmed": "Confirm?"}</button>
+              <button onClick={handleEditClick} disabled={editClicked}>{editClicked ? "Editing": "Edit"}</button>
+            </tr>
           </tr>
         </tbody>
       </table>
