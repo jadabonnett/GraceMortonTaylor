@@ -1,14 +1,23 @@
 import React, { useState } from "react";
 import "./App.css";
 import * as S from "./setup.js";
-import { setListA } from "./setup.js";
+//import { setListA } from "./setup.js";
 import {ScoreCounter} from "./QuestionCounter.js";
+const teamMembers = ['---']
 
-// export function updateScore(){
-//   S.ScoreCounter.document.getElementById("teamAScore").innerHTML = S.teamA.score
-//   //S.innerHTML = S.teamA.score
-//   //return S.teamA.score
-// }
+export function updateScore(){
+  ScoreCounter.document.getElementById("teamAScore").innerHTML = S.teamA.score
+  //S.innerHTML = S.teamA.score
+  //return S.teamA.score
+}
+
+S.teamA.players.forEach(el => {teamMembers.push(el.name)})
+
+//TO_DO
+
+// - figure out how the columns work, how to get them to repeat
+// - incrementing question num when moving through quiz-off
+// - undo action
 
 export function ScorecardColumn() {
   let currentQuizzer = S.teamA.players[0];
@@ -22,6 +31,7 @@ export function ScorecardColumn() {
   const [confirmClicked, setConfirmClicked] = useState(false);
   const [editClicked, setEditClicked] = useState(true); // Edit button is initially lit up
   const [otherStuffDisabled, setOtherStuffDisabled] = useState(false);
+
   const handleConfirmClick= () =>{
     setConfirmClicked(true);
     setEditClicked(false);
@@ -69,7 +79,6 @@ export function ScorecardColumn() {
       team.score += 20;
       currentQuizzer.personalScore += 20;
       currentQuizzer.correctAnswers += 1;
-      //console.log(currentQuizzer)
     } else if (val == "-10") {
       //is there a rule for if the team gets so many answers wrong?
       team.score -= 10;
@@ -90,7 +99,7 @@ export function ScorecardColumn() {
     questionNumber++; //this should hopefully be incremented along with the visual changes
     console.log(currentQuizzer)
     console.log(team.score)
-    //ScoreCounter()
+    //updateScore()
   }
 
   // Function to handle timeout button clicks
@@ -168,9 +177,10 @@ export function ScorecardColumn() {
           <tr>
             <td>
              <select
-                onClick={() => setListA(S.teamA.players)}
                 id="TeamAPlayers" disabled={otherStuffDisabled}>
-                <option id="unselected" value="---">---</option>
+                {teamMembers.map(type => (
+                <option key={type}value={type}>{type}</option>
+                ))}
               </select>
             </td>
           </tr>
