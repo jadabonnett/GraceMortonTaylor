@@ -12,7 +12,7 @@ export function ScoreCounter () {
         <div className="counter-container-2">
             <div className="counter-content">
                 <h3>Team 1 Score</h3>
-                <h1>{teamAScore}</h1>
+                <h1 id="teamAScore">{teamAScore}</h1>
                 <div className="button-container">
                     <button onClick={() => { 
                             setCounter(counter - 10)}
