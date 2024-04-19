@@ -164,7 +164,7 @@ export function ScorecardColumn() {
             <td>
               <select disabled={otherStuffDisabled}>
                 <option id="unselected" value="---">
-                  ---
+                   Type
                 </option>
                 <option value="FTV-Quote">FTV-First Words</option>
                 <option value="FTV-Quote">FTV-Quote</option>
@@ -178,16 +178,24 @@ export function ScorecardColumn() {
             <td>
              <select
                 id="TeamAPlayers" disabled={otherStuffDisabled}>
+<<<<<<< HEAD
                 {teamMembers.map(type => (
                 <option key={type}value={type}>{type}</option>
                 ))}
+=======
+                <option id="unselected" value="---">
+                    Name
+                </option>
+>>>>>>> 9f48d5df91028bdc3b6092aa89a3fa6036122dd9
               </select>
             </td>
           </tr>
           <tr>
             <td>
               <select onChange={() => handlePoints(S.teamA)}id="pointsDropdown" defaultValue={"---"} disabled={otherStuffDisabled}>
-                <option id="unselected" value="---">---</option>
+                <option id="unselected" value="---">
+                  Points
+                </option>
                 <option value="+10">+10</option>
                 <option value="+20">+20</option>
                 <option value="-10">-10</option>
@@ -199,7 +207,7 @@ export function ScorecardColumn() {
             <td>
               <select defaultValue={"---"} disabled={otherStuffDisabled}>
                 <option id="unselected" value="---">
-                  ---
+                  Bonus
                 </option>
                 <option>Bonus val</option>
               </select>
