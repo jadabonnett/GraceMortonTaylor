@@ -181,15 +181,9 @@ export function ScorecardColumn() {
             <td>
              <select
                 id="TeamAPlayers" disabled={otherStuffDisabled}>
-<<<<<<< HEAD
-                {teamMembers.map(type => (
-                <option key={type}value={type}>{type}</option>
-                ))}
-=======
                 <option id="unselected" value="---">
                     Name
                 </option>
->>>>>>> 9f48d5df91028bdc3b6092aa89a3fa6036122dd9
               </select>
             </td>
           </tr>
