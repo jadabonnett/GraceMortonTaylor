@@ -37,6 +37,8 @@ export function ScorecardColumn() {
   let questionNumber = 1
   let questionsByNumber = [];
 
+  const [foulAdded, setFoulAdded] = useState(false);
+
   
   // Function to handle foul button clicks
   function handleFoulButtonClick(team) {
@@ -56,6 +58,7 @@ export function ScorecardColumn() {
         setTeamBScore(team.score);
       }
     }
+    setFoulAdded(!foulAdded);
   }
 
   function handlePoints(team) {
@@ -201,7 +204,7 @@ export function ScorecardColumn() {
           </tr>
           <tr>
             <td>
-              <button onClick={() => handleFoulButtonClick(S.teamA)} id="table_button" disabled={otherStuffDisabled}>Add Foul</button >
+              <button onClick={() => handleFoulButtonClick(S.teamA)} id="table_button" disabled={otherStuffDisabled}>{foulAdded ? "Undo foul?" : "Add Foul"}</button >
             </td>
           </tr>
           <tr>
