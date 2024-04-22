@@ -58,6 +58,10 @@ export function ScorecardColumn() {
     }
   }
 
+  function returnTeamAScore() {
+    return teamAScore
+  }
+
   function handlePoints(team) {
     updatePlayer(team)
     let val = document.getElementById("pointsDropdown").value;
