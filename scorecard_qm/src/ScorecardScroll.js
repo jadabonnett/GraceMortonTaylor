@@ -12,6 +12,7 @@ export default function ScrollingTable() {
                 <tr>
                     {columns.map((_, index) => (
                         <td key={index}>
+                            <div className="question-number">Question {index + 1}</div>
                             <ScorecardColumn />
                         </td>
                         ))}

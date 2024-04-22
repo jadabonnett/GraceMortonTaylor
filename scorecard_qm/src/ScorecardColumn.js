@@ -166,9 +166,6 @@ export function ScorecardColumn() {
     <div className="table-container">
       <table id="select_cols">
         <thead>
-          <tr>
-            <th>Question #</th>
-          </tr>
         </thead>
         <tbody>
           <tr>
