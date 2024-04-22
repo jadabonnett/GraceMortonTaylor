@@ -170,7 +170,7 @@ export function ScorecardColumn() {
         <tbody>
           <tr>
             <td>
-<select id="QuestionType" disabled={otherStuffDisabled}>
+      <select id="QuestionType" disabled={otherStuffDisabled}>
             <option id="unselected" value="---">
                   Type
             </option>
