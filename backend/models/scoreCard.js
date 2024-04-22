@@ -4,6 +4,7 @@ const Schema = mongoose.Schema;
 const scoreCardSchema = new Schema({
     quizNumber: Number,
     quizMaster: String,
+    quizDate: Date,
     questions: [{ 
         questionNumber: Number,
         player: String,
