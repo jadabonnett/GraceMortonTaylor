@@ -19,10 +19,12 @@ router.get('/scorecards/:quiznumber/teams', (req, res, next) => {
 });
 
 router.post('/scorecard', (req, res, next) => { 
-    if(!req.body.quizNumber){
+    if(!req.body.quizNumber || !req.body.quizDate){
         res.json({error: "Input is not correct"});
     }
-    else if(!ScoreCard.exists({quizNumber: req.body.quizNumber})) {
+    else if(!ScoreCard.exists({
+        quizNumber: req.body.quizNumber,
+        quizDate: req.body.quizDate})) {
         try {
             ScoreCard.create(req.body)
                 .then((data) => res.json(data))
