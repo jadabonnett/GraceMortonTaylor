@@ -3,7 +3,7 @@ import "./App.css";
 import * as S from "./setup.js";
 //import { setListA } from "./setup.js";
 import {ScoreCounter} from "./QuestionCounter.js";
-const teamMembers = ['---']
+const teamMembers = []
 
 export function updateScore(){
   ScoreCounter.document.getElementById("teamAScore").innerHTML = S.teamA.score
@@ -32,11 +32,20 @@ export function ScorecardColumn() {
   const [editClicked, setEditClicked] = useState(true); // Edit button is initially lit up
   const [otherStuffDisabled, setOtherStuffDisabled] = useState(false);
 
-  const handleConfirmClick= () =>{
+
+  //changed from const to function
+   /*  const handleConfirmClick= () =>{
+      setConfirmClicked(true);
+      setEditClicked(false);
+      setOtherStuffDisabled(true);
+    } */
+  
+  function handleConfirmClick(){
     setConfirmClicked(true);
     setEditClicked(false);
     setOtherStuffDisabled(true);
-  }
+    handlePoints(S.teamA);
+    }
 
   const handleEditClick = () => {
     setEditClicked(true);
@@ -44,14 +53,16 @@ export function ScorecardColumn() {
     setOtherStuffDisabled(false);
   };
 
-  let questionNumber = 1
-  let questionsByNumber = [];
-
   const [foulAdded, setFoulAdded] = useState(false);
+  const [foulUndo, setFoulUndo] = useState(false); //still working on
 
-  
+  const [questionNumber, setQuestionNumber] = useState(1); // still working on
+  let questionsByNumber = {};
+  let questionTypes = ["FTV", "Location", "Reference", "Regular", "Scriptural", "Situation"];
+
   // Function to handle foul button clicks
   function handleFoulButtonClick(team) {
+    setFoulAdded(true);
     if (team === S.teamA) {
       team.fouls += 1;
       setTeamAFoulCount(team.fouls);
@@ -68,7 +79,6 @@ export function ScorecardColumn() {
         setTeamBScore(team.score);
       }
     }
-    setFoulAdded(!foulAdded);
   }
 
   function handlePoints(team) {
@@ -95,14 +105,12 @@ export function ScorecardColumn() {
       setTeamBScore(team.score);
     }
     setIsScoreSelected(true);
-    let foulBool = false
-    var selectorQ = document.getElementById("QuestionType");
-    //var newQuestion = new Question(questionNumber, team.name, currentQuizzer.name, val, selectorQ.value, foulBool);// need to figure out foul bool
-    //questionsByNumber[questionNumber] = newQuestion;
-    questionNumber++; //this should hopefully be incremented along with the visual changes
-    console.log(currentQuizzer)
-    console.log(team.score)
-    //updateScore()
+
+    let questionNumber = Object.keys(questionsByNumber).length+1;
+    var questionType = getQuestionType();
+    addQuestion(questionNumber, team.teamName, currentQuizzer.name, val, questionType, foulAdded);
+    setQuestionNumber(prevQuestionNumber => prevQuestionNumber + 1);
+    console.log(questionsByNumber);
   }
 
   // Function to handle timeout button clicks
@@ -165,31 +173,33 @@ export function ScorecardColumn() {
         <tbody>
           <tr>
             <td>
-              <select disabled={otherStuffDisabled}>
-                <option id="unselected" value="---">
-                   Type
-                </option>
-                <option value="FTV-Quote">FTV-First Words</option>
-                <option value="FTV-Quote">FTV-Quote</option>
-                <option value="Location">Location</option>
-                <option value="Reference">Reference</option>
-                <option value="Regular">Regular</option>
-              </select>
+<select id="QuestionType" disabled={otherStuffDisabled}>
+            <option id="unselected" value="---">
+                  Type
+            </option>
+        {questionTypes.map(type => (
+          <option key={type} value={type}>{type}</option>
+        ))}
+      </select>  
+
             </td>
           </tr>
           <tr>
             <td>
-             <select
+            <select
                 id="TeamAPlayers" disabled={otherStuffDisabled}>
                 <option id="unselected" value="---">
-                    Name
+                  Name
                 </option>
+                {teamMembers.map(type => (
+                <option key={type}value={type}>{type}</option>
+                ))}
               </select>
             </td>
           </tr>
           <tr>
             <td>
-              <select onChange={() => handlePoints(S.teamA)}id="pointsDropdown" defaultValue={"---"} disabled={otherStuffDisabled}>
+              <select id="pointsDropdown" defaultValue={"---"} disabled={otherStuffDisabled}>
                 <option id="unselected" value="---">
                   Points
                 </option>
