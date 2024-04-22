@@ -18,15 +18,8 @@ export function ScoreCounter () {
         <div className="counter-container-2">
             <div className="counter-content">
                 <h3>Team 1 Score</h3>
-                <h1>{TeamAScore}</h1>
-                <div className="button-container">
-                    <button onClick={() => { 
-                            setCounter(counter - 10)}
-                    }>-</button>
-                    <button onClick={() => {
-                        setCounter(counter + 10)}
-                    }>+</button>
-                </div>
+                <h1 id="teamAScore">{teamAScore}</h1>
+                
             </div>
         </div>
     );
@@ -39,16 +32,7 @@ function QuestionCounter () {
             <div className="counter-content">
                 <h3>Question Number</h3>
                 <h1>{counter}</h1>
-                <div className="button-container">
-                    <button onClick={() => { 
-                        if (counter > 0)
-                            setCounter(counter - 1)}
-                    }>-</button>
-                    <button onClick={() => {
-                        if (counter < 25)
-                        setCounter(counter + 1)}
-                    }>+</button>
-                </div>
+                
             </div>
             <ScoreCounter />
         </div>
