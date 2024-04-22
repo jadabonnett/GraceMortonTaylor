@@ -9,6 +9,9 @@ import {ScoreCounter} from "./QuestionCounter.js";
 //   //S.innerHTML = S.teamA.score
 //   //return S.teamA.score
 // }
+export function returnTeamAScore() {
+  return teamAScore;
+}
 
 export function ScorecardColumn() {
   let currentQuizzer = S.teamA.players[0];
@@ -58,9 +61,7 @@ export function ScorecardColumn() {
     }
   }
 
-  function returnTeamAScore() {
-    return teamAScore
-  }
+  
 
   function handlePoints(team) {
     updatePlayer(team)

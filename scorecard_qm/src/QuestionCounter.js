@@ -2,8 +2,7 @@ import React, { useState, useEffect } from 'react';
 //import {updateScore, teamAScore} from './ScorecardColumn.js';
 import './QuestionCounter.css';
 import * as S from "./setup.js";
-import teamAScore from "./ScorecardColumn.js"
-import returnTeamAScore from "./ScorecardColumn.js"
+import { returnTeamAScore } from "./ScorecardColumn.js";
 
 // import ScorecardColumn from './ScorecardColumn';
 
@@ -11,7 +10,7 @@ import returnTeamAScore from "./ScorecardColumn.js"
 
 export function ScoreCounter () {
     const [counter, setCounter] = useState(0);
-    const [loadScore, setScore] = useState(0);
+    const teamAScore = returnTeamAScore();
     //const [teamAScore, setTeamAScore] = useState(S.teamA.score)
 
     //WRITE CODE HERE
@@ -19,7 +18,7 @@ export function ScoreCounter () {
         <div className="counter-container-2">
             <div className="counter-content">
                 <h3>Team 1 Score</h3>
-                <h1>{counter}</h1>
+                <h1>{TeamAScore}</h1>
                 <div className="button-container">
                     <button onClick={() => { 
                             setCounter(counter - 10)}
