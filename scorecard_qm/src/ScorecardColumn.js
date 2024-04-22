@@ -62,7 +62,7 @@ export function ScorecardColumn() {
 
   // Function to handle foul button clicks
   function handleFoulButtonClick(team) {
-    setFoulAdded(true);
+    setFoulAdded(prevFoulAdded => !prevFoulAdded);
     if (team === S.teamA) {
       team.fouls += 1;
       setTeamAFoulCount(team.fouls);
