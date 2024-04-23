@@ -25,7 +25,7 @@ S.teamA.players.forEach(el => {teamMembers.push(el.name)})
 // - incrementing question num when moving through quiz-off
 // - undo action
 
-export function ScorecardColumn() {
+export function ScorecardColumn({columnId, addQuestion}) {
   let currentQuizzer = S.teamA.players[0];
   const { teamAScore, setTeamAScore } = useScores();
   const [teamAFouls, setTeamAFoulCount] = useState(S.teamA.fouls);
@@ -67,11 +67,12 @@ export function ScorecardColumn() {
       setOtherStuffDisabled(true);
     } */
   
-    function handleConfirmClick(event) {
-      setConfirmClicked(true);
-      setEditClicked(false);
-      setOtherStuffDisabled(true);
-      handlePoints(S.teamA, { target: { value: document.getElementById('pointsDropdown').value } }); // Ensuring event is passed correctly
+  function handleConfirmClick(){
+    console.log("ColumnID:",columnId);
+    setConfirmClicked(true);
+    setEditClicked(false);
+    setOtherStuffDisabled(true);
+    handlePoints(S.teamA, { target: { value: document.getElementById('pointsDropdown').value } }); // Ensuring event is passed correctly
     }
 
   const handleEditClick = () => {
@@ -81,7 +82,6 @@ export function ScorecardColumn() {
   };
 
   const [foulAdded, setFoulAdded] = useState(false);
-  const [foulUndo, setFoulUndo] = useState(false); //still working on
 
   const [questionNumber, setQuestionNumber] = useState(1); // still working on
   let questionsByNumber = {};
@@ -145,10 +145,10 @@ export function ScorecardColumn() {
     */
     setIsScoreSelected(true);
 
-    let questionNumber = Object.keys(questionsByNumber).length+1;
+    //let questionNumber = Object.keys(questionsByNumber).length+1;
     var questionType = getQuestionType();
     addQuestion(questionNumber, team.teamName, currentQuizzer.name, val, questionType, foulAdded);
-    setQuestionNumber(prevQuestionNumber => prevQuestionNumber + 1);
+    //setQuestionNumber(prevQuestionNumber => prevQuestionNumber + 1);
     console.log(questionsByNumber);
   }
 
@@ -194,6 +194,8 @@ export function ScorecardColumn() {
     var newQuestion = new Question(questionNumber, teamName, player, points, type, foulBool);
     questionsByNumber[questionNumber] = newQuestion;
     questionNumber++;
+    setQuestionNumber(prevQuestionNumber => prevQuestionNumber+1);
+    console.log(questionNumber);
   }
   
   function getQuestionType(){

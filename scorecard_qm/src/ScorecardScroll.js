@@ -10,10 +10,10 @@ export default function ScrollingTable() {
         <div className="horizontal-scroll-container">
             <table className="horizontal-scroll-content">
                 <tr>
-                    {columns.map((_, index) => (
+                    {columns.map((columnId, index) => (
                         <td key={index}>
                             <div className="question-number">Question {index + 1}</div>
-                            <ScorecardColumn />
+                            <ScorecardColumn key={columnId+1} columnId={columnId+1}/>
                         </td>
                         ))}
                 </tr>
