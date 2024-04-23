@@ -7,28 +7,25 @@ table {
   margin: 0px;
 }
 
-/* Style for table headers */
 th, td {
   padding: 8px;
   text-align: center;
   border: 2px solid black;
 }
 
-/* Style for table headers */
 th {
-  background-color: #f2f2f2; /* Light gray background for header cells */
+  background-color: #f2f2f2;
 }
 
-/* Style for alternating rows */
 tr:nth-child(even) {
-  background-color: #f9f9f9; /* Light background color for even rows */
+  background-color: #f9f9f9; 
 }
 
-/* Style for the select dropdowns */
 select {
   width: 100%;
   padding: 8px;
   box-sizing: border-box;
+  cursor: pointer; 
 }
 
 .App {
@@ -42,6 +39,37 @@ select {
   align-items: center;
   justify-content: left;
   padding: 5px;
+}
+
+/* Basic button styling */
+button {
+  padding: 5px; 
+  border: none; 
+  border-radius: 6px; 
+  font-size: 14px;
+  font-weight: 600; 
+  background-color: #007BFF; 
+  color: #FFFFFF; 
+  cursor: pointer; 
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3; 
+}
+
+button:active {
+  background-color: #004080;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
+  transform: translateY(1px); 
+}
+button:disabled {
+  background-color: #d3d3d3; 
+  color: #a9a9a9; 
+  cursor: not-allowed; 
+  box-shadow: none;
+  opacity: 0.6;
 }
 
 

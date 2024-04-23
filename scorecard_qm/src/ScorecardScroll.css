@@ -42,4 +42,7 @@
 
   .question-number{
     padding: 5px;
+    font-family: 'Optima', sans-serif; /* Set the desired font family */
+    font-size: 18px; /* Set the desired font size */
+    font-weight: bold; /* Optional: Set the font weight (e.g., bold) */
   }
