@@ -191,9 +191,7 @@ export function ScorecardColumn() {
         <tbody>
           <tr>
             <td>
-{/* <select id="QuestionType" disabled={otherStuffDisabled}> */}
-<select id="QuestionType" onChange={handleTypeChange} required disabled={otherStuffDisabled}>
-
+      <select id="QuestionType" onChange={handleTypeChange} required disabled={otherStuffDisabled}>
             <option id="unselected" value="---">
                   Type
             </option>
