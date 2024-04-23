@@ -13,7 +13,6 @@
     display: inline-block;
     width: 100px;
     height: 100px;
-    margin-right: 10px;
     background-color: lightblue;
   }
   
@@ -39,4 +38,8 @@
   
   .scroll-button.right {
     right: 0;
+  }
+
+  .question-number{
+    padding: 5px;
   }
