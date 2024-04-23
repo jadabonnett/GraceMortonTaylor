@@ -1,25 +1,17 @@
-/* Style for the container of the left table */
-.left-table {
-  float: left; /* Float the left table to the left side */
-}
-
-/* Style for the container of the right table */
-.right-table {
-  float: right; /* Float the right table to the right side */
-}
-
 /* Apply a basic style to the tables */
 table {
   border-collapse: collapse;
-  width: 95%; /* Set the width of each table to 45% */
-  margin: 20px; /* Add margin around each table */
+}
+
+.table-container{
+  margin: 0px;
 }
 
 /* Style for table headers */
 th, td {
-  border: 1px solid #ddd; /* Add a border around each cell */
   padding: 8px;
   text-align: center;
+  border: 2px solid black;
 }
 
 /* Style for table headers */
@@ -49,7 +41,7 @@ select {
   flex-direction: row;
   align-items: center;
   justify-content: left;
-  padding: 10px;
+  padding: 5px;
 }
 
 

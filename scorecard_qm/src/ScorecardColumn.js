@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "./App.css";
 import * as S from "./setup.js";
 import { useScores } from './ScoreContext';
@@ -38,6 +38,27 @@ export function ScorecardColumn() {
   const [editClicked, setEditClicked] = useState(true); // Edit button is initially lit up
   const [otherStuffDisabled, setOtherStuffDisabled] = useState(false);
 
+  const [selectedType, setSelectedType] = useState('');
+  const [selectedName, setSelectedName] = useState('');
+  const [selectedPoints, setSelectedPoints] = useState('');
+
+  useEffect(() => {
+    // Check if all required dropdowns are selected
+    const allSelected = selectedType && selectedName && selectedPoints;
+    setConfirmClicked(!allSelected);
+  }, [selectedType, selectedName, selectedPoints]);
+
+  const handleTypeChange = (event) => {
+    setSelectedType(event.target.value);
+  };
+
+  const handleNameChange = (event) => {
+    setSelectedName(event.target.value);
+  };
+
+  const handlePointsChange = (event) => {
+    setSelectedPoints(event.target.value);
+  };
 
   //changed from const to function
    /*  const handleConfirmClick= () =>{
@@ -68,7 +89,7 @@ export function ScorecardColumn() {
 
   // Function to handle foul button clicks
   function handleFoulButtonClick(team) {
-    setFoulAdded(true);
+    setFoulAdded(prevFoulAdded => !prevFoulAdded);
     if (team === S.teamA) {
       team.fouls += 1;
       setTeamAFoulCount(team.fouls);
@@ -188,7 +209,7 @@ export function ScorecardColumn() {
         <tbody>
           <tr>
             <td>
-<select id="QuestionType" disabled={otherStuffDisabled}>
+      <select id="QuestionType" onChange={handleTypeChange} required disabled={otherStuffDisabled}>
             <option id="unselected" value="---">
                   Type
             </option>
@@ -201,8 +222,9 @@ export function ScorecardColumn() {
           </tr>
           <tr>
             <td>
-            <select
-                id="TeamAPlayers" disabled={otherStuffDisabled}>
+{/*             <select
+                id="TeamAPlayers" disabled={otherStuffDisabled}> */}
+              <select id="TeamAPlayers" onChange={handleNameChange} required disabled={otherStuffDisabled}>
                 <option id="unselected" value="---">
                   Name
                 </option>
