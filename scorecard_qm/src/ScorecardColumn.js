@@ -237,11 +237,10 @@ export function ScorecardColumn() {
           <tr>
             <td>
             <select 
-              id="pointsDropdown" 
-              defaultValue={"---"} 
-              //onChange={(e) => handlePoints(S.teamA, e)} // Pass event to handlePoints
-              disabled={otherStuffDisabled}
-            >
+              id="pointsDropdown" onChange={handlePointsChange} required disabled={otherStuffDisabled}>
+              <opiton id="unselected" value ="---">
+                Points
+              </opiton>
               <option value="---">Points</option>
               <option value="+10">+10</option>
               <option value="+20">+20</option>
@@ -272,7 +271,9 @@ export function ScorecardColumn() {
           </tr>
           <tr>
             <tr>
-              <button onClick={(e) => handleConfirmClick(e)} disabled={confirmClicked}>{confirmClicked? "Confirmed": "Confirm?"}</button>
+            <button onClick={(e) => {
+              handleConfirmClick(e);
+            }} disabled={confirmClicked}>{confirmClicked ? "Confirmed" : "Confirm?"}</button>
 
               <button onClick={handleEditClick} disabled={editClicked}>{editClicked ? "Editing": "Edit"}</button>
             </tr>
