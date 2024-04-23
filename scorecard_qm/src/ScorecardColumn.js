@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import "./App.css";
 import * as S from "./setup.js";
-//import { setListA } from "./setup.js";
+import { useScores } from './ScoreContext';
 import {ScoreCounter} from "./QuestionCounter.js";
+
 const teamMembers = []
 
 // export function updateScore(){
@@ -10,9 +11,6 @@ const teamMembers = []
 //   //S.innerHTML = S.teamA.score
 //   //return S.teamA.score
 // }
-export function returnTeamAScore() {
-  return teamAScore;
-}
 export function updateScore(){
   ScoreCounter.document.getElementById("teamAScore").innerHTML = S.teamA.score
   //S.innerHTML = S.teamA.score
@@ -29,7 +27,7 @@ S.teamA.players.forEach(el => {teamMembers.push(el.name)})
 
 export function ScorecardColumn() {
   let currentQuizzer = S.teamA.players[0];
-  const [teamAScore, setTeamAScore] = useState(S.teamA.score);
+  const { teamAScore, setTeamAScore } = useScores();
   const [teamAFouls, setTeamAFoulCount] = useState(S.teamA.fouls);
   const [teamATimeouts, setTeamATimeouts] = useState(S.teamA.timeouts);
   const [teamBScore, setTeamBScore] = useState(S.teamB.score);
@@ -48,11 +46,11 @@ export function ScorecardColumn() {
       setOtherStuffDisabled(true);
     } */
   
-  function handleConfirmClick(){
-    setConfirmClicked(true);
-    setEditClicked(false);
-    setOtherStuffDisabled(true);
-    handlePoints(S.teamA);
+    function handleConfirmClick(event) {
+      setConfirmClicked(true);
+      setEditClicked(false);
+      setOtherStuffDisabled(true);
+      handlePoints(S.teamA, { target: { value: document.getElementById('pointsDropdown').value } }); // Ensuring event is passed correctly
     }
 
   const handleEditClick = () => {
@@ -76,7 +74,7 @@ export function ScorecardColumn() {
       setTeamAFoulCount(team.fouls);
       if (team.fouls % 3 === 0) {
         team.score -= 10;
-        setTeamAScore(team.score);
+        setTeamAScore(teamAScore - 10);
       }
     } else {
       team.fouls += 1;
@@ -91,29 +89,39 @@ export function ScorecardColumn() {
 
   
 
-  function handlePoints(team) {
+  function handlePoints(team, event) {
     updatePlayer(team)
-    let val = document.getElementById("pointsDropdown").value;
+    let val = parseInt(event.target.value);
+    console.log(event.target.value)
     console.log(team.score)
+    console.log("val", val)
     console.log(currentQuizzer)
     if (val == "+10") {
+      setTeamAScore(teamAScore + 10);
       team.score += 10;
     } else if (val == "+20") {
       team.score += 20;
+      setTeamAScore(teamAScore + 20);
       currentQuizzer.personalScore += 20;
       currentQuizzer.correctAnswers += 1;
     } else if (val == "-10") {
       //is there a rule for if the team gets so many answers wrong?
+      setTeamAScore(teamAScore - 10);
       team.score -= 10;
       currentQuizzer.personalScore -= 10;
     } else {
       team.score -= 20;
+      setTeamAScore(teamAScore - 10);
     }
+    console.log("val2", val)
+
+    /*
     if (team === S.teamA) {
       setTeamAScore(team.score);
     } else {
       setTeamBScore(team.score);
     }
+    */
     setIsScoreSelected(true);
 
     let questionNumber = Object.keys(questionsByNumber).length+1;
@@ -206,15 +214,18 @@ export function ScorecardColumn() {
           </tr>
           <tr>
             <td>
-              <select id="pointsDropdown" defaultValue={"---"} disabled={otherStuffDisabled}>
-                <option id="unselected" value="---">
-                  Points
-                </option>
-                <option value="+10">+10</option>
-                <option value="+20">+20</option>
-                <option value="-10">-10</option>
-                <option value="-20">-20</option>
-              </select>
+            <select 
+              id="pointsDropdown" 
+              defaultValue={"---"} 
+              //onChange={(e) => handlePoints(S.teamA, e)} // Pass event to handlePoints
+              disabled={otherStuffDisabled}
+            >
+              <option value="---">Points</option>
+              <option value="+10">+10</option>
+              <option value="+20">+20</option>
+              <option value="-10">-10</option>
+              <option value="-20">-20</option>
+            </select>
             </td>
           </tr>
           <tr>
@@ -239,7 +250,8 @@ export function ScorecardColumn() {
           </tr>
           <tr>
             <tr>
-              <button onClick={handleConfirmClick} disabled={confirmClicked}>{confirmClicked? "Confirmed": "Confirm?"}</button>
+              <button onClick={(e) => handleConfirmClick(e)} disabled={confirmClicked}>{confirmClicked? "Confirmed": "Confirm?"}</button>
+
               <button onClick={handleEditClick} disabled={editClicked}>{editClicked ? "Editing": "Edit"}</button>
             </tr>
           </tr>
