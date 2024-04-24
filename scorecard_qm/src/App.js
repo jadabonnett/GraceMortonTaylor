@@ -1,18 +1,33 @@
-import './App.css';
-import QuestionCounter from './QuestionCounter';
-import ScrollingTable from './ScorecardScroll';
-import './setup.js'
+import React from 'react';
+import {BrowserRouter as Router, 
+        Routes, 
+        Route} from "react-router-dom";
+import Scoreboard from "./ScoreboardView.js";
+import Scorecard from './ScorecardView.js';
 
-function App() {
-   
+//Uncomment below for fancy look on site
+
+import './App.css';
+
+function NoMatch() {
   return (
-    <div className="App">
-      < QuestionCounter />
-      <div className="scorecard" >
-        < ScrollingTable />
-      </div>
+    <div style={{ padding: 20 }}>
+      <h2>404: Page Not Found</h2>
+      <p>Lorem ipsum dolor sit amet, consectetur adip.</p>
     </div>
   );
 }
 
- export default App;
+function App() {
+return (
+  <Router>
+    <Routes>
+      <Route path="/" element={<Scoreboard />} />
+      <Route path="/scorecard_qm" element={<Scorecard />} />
+      <Route path="*" element={<NoMatch />} />
+    </Routes>
+  </Router>
+)
+};
+
+export default App;
