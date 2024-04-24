@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 import * as S from "./setup.js";
 import { useScores } from './ScoreContext';
@@ -42,6 +42,8 @@ export function ScorecardColumn({columnId, addQuestion}) {
   const [selectedName, setSelectedName] = useState('');
   const [selectedPoints, setSelectedPoints] = useState('');
 
+  const containerRef = useRef(null);
+
   useEffect(() => {
     // Check if all required dropdowns are selected
     const allSelected = selectedType && selectedName && selectedPoints;
@@ -67,12 +69,26 @@ export function ScorecardColumn({columnId, addQuestion}) {
       setOtherStuffDisabled(true);
     } */
   
+<<<<<<< HEAD
   function handleConfirmClick(){
     console.log("ColumnID:",columnId);
     setConfirmClicked(true);
     setEditClicked(false);
     setOtherStuffDisabled(true);
     handlePoints(S.teamA, { target: { value: document.getElementById('pointsDropdown').value } }); // Ensuring event is passed correctly
+=======
+    function handleConfirmClick(event) {
+      setConfirmClicked(true);
+      setEditClicked(false);
+      setOtherStuffDisabled(true);
+      handlePoints(S.teamA, { target: { value: document.getElementById('pointsDropdown').value } }); // Ensuring event is passed correctly
+      
+      
+        const scroll = document.getElementById("horizontal-scroll-container");
+        scroll.scrollBy(136.45,0,);
+        
+      
+>>>>>>> b0636aa5 (auto scroll)
     }
 
   const handleEditClick = () => {
@@ -204,6 +220,7 @@ export function ScorecardColumn({columnId, addQuestion}) {
   }
 
   return (
+    
     <div className="table-container">
       <table id="select_cols">
         <thead>
@@ -224,7 +241,7 @@ export function ScorecardColumn({columnId, addQuestion}) {
           </tr>
           <tr>
             <td>
-{/*             <select
+                {/* <select
                 id="TeamAPlayers" disabled={otherStuffDisabled}> */}
               <select id="TeamAPlayers" onChange={handleNameChange} required disabled={otherStuffDisabled}>
                 <option id="unselected" value="---">
@@ -240,9 +257,9 @@ export function ScorecardColumn({columnId, addQuestion}) {
             <td>
             <select 
               id="pointsDropdown" onChange={handlePointsChange} required disabled={otherStuffDisabled}>
-              <opiton id="unselected" value ="---">
+              <option id="unselected" value ="---">
                 Points
-              </opiton>
+              </option>
               <option value="---">Points</option>
               <option value="+10">+10</option>
               <option value="+20">+20</option>

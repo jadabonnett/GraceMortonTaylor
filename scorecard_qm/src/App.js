@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       < QuestionCounter />
-      <div className="scorecard">
+      <div className="scorecard" >
         < ScrollingTable />
       </div>
     </div>
