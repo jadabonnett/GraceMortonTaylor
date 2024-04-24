@@ -69,27 +69,19 @@ export function ScorecardColumn({columnId, addQuestion}) {
       setOtherStuffDisabled(true);
     } */
   
-<<<<<<< HEAD
   function handleConfirmClick(){
     console.log("ColumnID:",columnId);
     setConfirmClicked(true);
     setEditClicked(false);
     setOtherStuffDisabled(true);
     handlePoints(S.teamA, { target: { value: document.getElementById('pointsDropdown').value } }); // Ensuring event is passed correctly
-=======
-    function handleConfirmClick(event) {
-      setConfirmClicked(true);
-      setEditClicked(false);
-      setOtherStuffDisabled(true);
-      handlePoints(S.teamA, { target: { value: document.getElementById('pointsDropdown').value } }); // Ensuring event is passed correctly
-      
-      
-        const scroll = document.getElementById("horizontal-scroll-container");
-        scroll.scrollBy(136.45,0,);
-        
-      
->>>>>>> b0636aa5 (auto scroll)
-    }
+    
+    //auto scroll
+    const scroll = document.getElementById("horizontal-scroll-container");
+    scroll.scrollBy(136.45,0,);
+
+  }
+
 
   const handleEditClick = () => {
     setEditClicked(true);
