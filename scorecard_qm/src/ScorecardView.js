@@ -1,3 +1,4 @@
+import React from 'react';
 import './ScoreboardView.css';
 import QuestionCounter from './QuestionCounter';
 import ScrollingTable from './ScorecardScroll';
