@@ -237,7 +237,21 @@ export function ScorecardColumn({columnId, addQuestion}) {
                 id="TeamAPlayers" disabled={otherStuffDisabled}> */}
               <select id="TeamAPlayers" onChange={handleNameChange} required disabled={otherStuffDisabled}>
                 <option id="unselected" value="---">
-                  Name
+                  Team 1 
+                </option>
+                {teamMembers.map(type => (
+                <option key={type}value={type}>{type}</option>
+                ))}
+              </select>
+            </td>
+          </tr>
+          <tr>
+          <td>
+                {/* <select
+                id="TeamPlayers" disabled={otherStuffDisabled}> */}
+              <select id="TeamBPlayers" onChange={handleNameChange} required disabled={otherStuffDisabled}>
+                <option id="unselected" value="---">
+                  Team 2
                 </option>
                 {teamMembers.map(type => (
                 <option key={type}value={type}>{type}</option>
@@ -258,16 +272,6 @@ export function ScorecardColumn({columnId, addQuestion}) {
               <option value="-10">-10</option>
               <option value="-20">-20</option>
             </select>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <select defaultValue={"---"} disabled={otherStuffDisabled}>
-                <option id="unselected" value="---">
-                  Bonus
-                </option>
-                <option>Bonus val</option>
-              </select>
             </td>
           </tr>
           <tr>
