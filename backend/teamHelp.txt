@@ -1,0 +1,29 @@
+"players": [
+			{
+				"name": "Jada",
+				"personalScore": 100,
+				"personalFouls": 0,
+				"correctAnswers": 5,
+				"_id": "661976600373d31efe937303"
+			},
+			{
+				"name": "Ashley",
+				"personalScore": 20,
+				"personalFouls": 40,
+				"correctAnswers": 1,
+				"_id": "661976600373d31efe937304"
+			},
+			{
+				"name": "Mason",
+				"personalScore": 40,
+				"personalFouls": 2,
+				"correctAnswers": 2,
+				"_id": "661976600373d31efe937305"
+			},
+			{
+				"name": "Ellie",
+				"personalScore": 20,
+				"personalFouls": 0,
+				"correctAnswers": 1,
+				"_id": "661976600373d31efe937306"
+			}

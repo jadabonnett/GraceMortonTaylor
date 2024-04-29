@@ -1,0 +1,19 @@
+/* Basic centering in use. PLEASE change before handing off. */
+
+.scoreboard_page {
+    height: 100%;
+    width: 100%;
+}
+
+.scoreboard_container {
+    display: flex;
+    flex-direction: row;
+    margin: 20px;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.btn {
+    display: block; /* centers button */
+    margin: auto;
+}
