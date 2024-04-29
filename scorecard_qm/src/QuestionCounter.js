@@ -26,16 +26,33 @@ export function ScoreCounter () {
     );
 }
 
+export function ScoreCounter2 () {
+    const [counter, setCounter] = useState(0);
+    const { teamBScore } = useScores();
+    //const [teamAScore, setTeamAScore] = useState(S.teamA.score)
+
+    //WRITE CODE HERE
+    return (
+        <div className="counter-container-2">
+            <div className="counter-content">
+                <h3>Team 2 Score</h3>
+                <h1>{teamBScore}</h1>
+            </div>
+        </div>
+    );
+}
+
 function QuestionCounter () {
     const [counter, setCounter] = useState(0);
     return (
         <div className="counter-container-1">
+            <ScoreCounter />
             <div className="counter-content">
                 <h3>Question Number</h3>
                 <h1>{counter}</h1>
                 
             </div>
-            <ScoreCounter />
+            <ScoreCounter2 />
         </div>
 
     );
