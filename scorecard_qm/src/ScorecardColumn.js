@@ -82,6 +82,11 @@ export function ScorecardColumn({columnId, addQuestion}) {
 
   }
 
+  const [bonusClicked, setBonusClicked] = useState(false);
+  const handleButtonClick = () => {
+    setBonusClicked((prevBonusClicked) => !prevBonusClicked);
+  };
+
 
   const handleEditClick = () => {
     setEditClicked(true);
@@ -277,7 +282,7 @@ export function ScorecardColumn({columnId, addQuestion}) {
           <tr>
             <td>
               <button onClick={() => handleFoulButtonClick(S.teamA)} id="table_button" disabled={otherStuffDisabled}>{foulAdded ? "Undo foul?" : "Add Foul"}</button >
-            </td>
+              <button id="table_button" disabled={otherStuffDisabled} onClick={handleButtonClick}>{bonusClicked ? "Undo Bonus?" : "Add Bonus"}</button>            </td>
           </tr>
           <tr>
             <td>
