@@ -1,10 +1,16 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
 import * as S from "./setup.js";
-//import { setListA } from "./setup.js";
+import { useScores } from './ScoreContext';
 import {ScoreCounter} from "./QuestionCounter.js";
+
 const teamMembers = []
 
+// export function updateScore(){
+//   S.ScoreCounter.document.getElementById("teamAScore").innerHTML = S.teamA.score
+//   //S.innerHTML = S.teamA.score
+//   //return S.teamA.score
+// }
 export function updateScore(){
   ScoreCounter.document.getElementById("teamAScore").innerHTML = S.teamA.score
   //S.innerHTML = S.teamA.score
@@ -19,9 +25,9 @@ S.teamA.players.forEach(el => {teamMembers.push(el.name)})
 // - incrementing question num when moving through quiz-off
 // - undo action
 
-export function ScorecardColumn() {
+export function ScorecardColumn({columnId, addQuestion}) {
   let currentQuizzer = S.teamA.players[0];
-  const [teamAScore, setTeamAScore] = useState(S.teamA.score);
+  const { teamAScore, setTeamAScore } = useScores();
   const [teamAFouls, setTeamAFoulCount] = useState(S.teamA.fouls);
   const [teamATimeouts, setTeamATimeouts] = useState(S.teamA.timeouts);
   const [teamBScore, setTeamBScore] = useState(S.teamB.score);
@@ -32,6 +38,29 @@ export function ScorecardColumn() {
   const [editClicked, setEditClicked] = useState(true); // Edit button is initially lit up
   const [otherStuffDisabled, setOtherStuffDisabled] = useState(false);
 
+  const [selectedType, setSelectedType] = useState('');
+  const [selectedName, setSelectedName] = useState('');
+  const [selectedPoints, setSelectedPoints] = useState('');
+
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    // Check if all required dropdowns are selected
+    const allSelected = selectedType && selectedName && selectedPoints;
+    setConfirmClicked(!allSelected);
+  }, [selectedType, selectedName, selectedPoints]);
+
+  const handleTypeChange = (event) => {
+    setSelectedType(event.target.value);
+  };
+
+  const handleNameChange = (event) => {
+    setSelectedName(event.target.value);
+  };
+
+  const handlePointsChange = (event) => {
+    setSelectedPoints(event.target.value);
+  };
 
   //changed from const to function
    /*  const handleConfirmClick= () =>{
@@ -41,11 +70,18 @@ export function ScorecardColumn() {
     } */
   
   function handleConfirmClick(){
+    console.log("ColumnID:",columnId);
     setConfirmClicked(true);
     setEditClicked(false);
     setOtherStuffDisabled(true);
-    handlePoints(S.teamA);
-    }
+    handlePoints(S.teamA, { target: { value: document.getElementById('pointsDropdown').value } }); // Ensuring event is passed correctly
+    
+    //auto scroll
+    const scroll = document.getElementById("horizontal-scroll-container");
+    scroll.scrollBy(136.45,0,);
+
+  }
+
 
   const handleEditClick = () => {
     setEditClicked(true);
@@ -54,7 +90,6 @@ export function ScorecardColumn() {
   };
 
   const [foulAdded, setFoulAdded] = useState(false);
-  const [foulUndo, setFoulUndo] = useState(false); //still working on
 
   const [questionNumber, setQuestionNumber] = useState(1); // still working on
   let questionsByNumber = {};
@@ -62,13 +97,13 @@ export function ScorecardColumn() {
 
   // Function to handle foul button clicks
   function handleFoulButtonClick(team) {
-    setFoulAdded(true);
+    setFoulAdded(prevFoulAdded => !prevFoulAdded);
     if (team === S.teamA) {
       team.fouls += 1;
       setTeamAFoulCount(team.fouls);
       if (team.fouls % 3 === 0) {
         team.score -= 10;
-        setTeamAScore(team.score);
+        setTeamAScore(teamAScore - 10);
       }
     } else {
       team.fouls += 1;
@@ -81,35 +116,47 @@ export function ScorecardColumn() {
     }
   }
 
-  function handlePoints(team) {
+  
+
+  function handlePoints(team, event) {
     updatePlayer(team)
-    let val = document.getElementById("pointsDropdown").value;
+    let val = parseInt(event.target.value);
+    console.log(event.target.value)
     console.log(team.score)
+    console.log("val", val)
     console.log(currentQuizzer)
     if (val == "+10") {
+      setTeamAScore(teamAScore + 10);
       team.score += 10;
     } else if (val == "+20") {
       team.score += 20;
+      setTeamAScore(teamAScore + 20);
       currentQuizzer.personalScore += 20;
       currentQuizzer.correctAnswers += 1;
     } else if (val == "-10") {
       //is there a rule for if the team gets so many answers wrong?
+      setTeamAScore(teamAScore - 10);
       team.score -= 10;
       currentQuizzer.personalScore -= 10;
     } else {
       team.score -= 20;
+      setTeamAScore(teamAScore - 10);
     }
+    console.log("val2", val)
+
+    /*
     if (team === S.teamA) {
       setTeamAScore(team.score);
     } else {
       setTeamBScore(team.score);
     }
+    */
     setIsScoreSelected(true);
 
-    let questionNumber = Object.keys(questionsByNumber).length+1;
+    //let questionNumber = Object.keys(questionsByNumber).length+1;
     var questionType = getQuestionType();
     addQuestion(questionNumber, team.teamName, currentQuizzer.name, val, questionType, foulAdded);
-    setQuestionNumber(prevQuestionNumber => prevQuestionNumber + 1);
+    //setQuestionNumber(prevQuestionNumber => prevQuestionNumber + 1);
     console.log(questionsByNumber);
   }
 
@@ -155,6 +202,8 @@ export function ScorecardColumn() {
     var newQuestion = new Question(questionNumber, teamName, player, points, type, foulBool);
     questionsByNumber[questionNumber] = newQuestion;
     questionNumber++;
+    setQuestionNumber(prevQuestionNumber => prevQuestionNumber+1);
+    console.log(questionNumber);
   }
   
   function getQuestionType(){
@@ -163,6 +212,7 @@ export function ScorecardColumn() {
   }
 
   return (
+    
     <div className="table-container">
       <table id="select_cols">
         <thead>
@@ -170,7 +220,7 @@ export function ScorecardColumn() {
         <tbody>
           <tr>
             <td>
-<select id="QuestionType" disabled={otherStuffDisabled}>
+      <select id="QuestionType" onChange={handleTypeChange} required disabled={otherStuffDisabled}>
             <option id="unselected" value="---">
                   Type
             </option>
@@ -183,8 +233,26 @@ export function ScorecardColumn() {
           </tr>
           <tr>
             <td>
-            <select
-                id="TeamAPlayers" disabled={otherStuffDisabled}>
+                {/* <select
+                id="TeamAPlayers" disabled={otherStuffDisabled}> */}
+              <select id="TeamAPlayers" onChange={handleNameChange} required disabled={otherStuffDisabled}>
+                <option id="unselected" value="---">
+                  Team 1 
+                </option>
+                {teamMembers.map(type => (
+                <option key={type}value={type}>{type}</option>
+                ))}
+              </select>
+            </td>
+          </tr>
+          <tr>
+          <td>
+                {/* <select
+                id="TeamPlayers" disabled={otherStuffDisabled}> */}
+              <select id="TeamBPlayers" onChange={handleNameChange} required disabled={otherStuffDisabled}>
+                <option id="unselected" value="---">
+                  Team 2
+                </option>
                 {teamMembers.map(type => (
                 <option key={type}value={type}>{type}</option>
                 ))}
@@ -193,25 +261,17 @@ export function ScorecardColumn() {
           </tr>
           <tr>
             <td>
-              <select id="pointsDropdown" defaultValue={"---"} disabled={otherStuffDisabled}>
-                <option id="unselected" value="---">
-                  Points
-                </option>
-                <option value="+10">+10</option>
-                <option value="+20">+20</option>
-                <option value="-10">-10</option>
-                <option value="-20">-20</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td>
-              <select defaultValue={"---"} disabled={otherStuffDisabled}>
-                <option id="unselected" value="---">
-                  Bonus
-                </option>
-                <option>Bonus val</option>
-              </select>
+            <select 
+              id="pointsDropdown" onChange={handlePointsChange} required disabled={otherStuffDisabled}>
+              <option id="unselected" value ="---">
+                Points
+              </option>
+              <option value="---">Points</option>
+              <option value="+10">+10</option>
+              <option value="+20">+20</option>
+              <option value="-10">-10</option>
+              <option value="-20">-20</option>
+            </select>
             </td>
           </tr>
           <tr>
@@ -226,7 +286,10 @@ export function ScorecardColumn() {
           </tr>
           <tr>
             <tr>
-              <button onClick={handleConfirmClick} disabled={confirmClicked}>{confirmClicked? "Confirmed": "Confirm?"}</button>
+            <button onClick={(e) => {
+              handleConfirmClick(e);
+            }} disabled={confirmClicked}>{confirmClicked ? "Confirmed" : "Confirm?"}</button>
+
               <button onClick={handleEditClick} disabled={editClicked}>{editClicked ? "Editing": "Edit"}</button>
             </tr>
           </tr>
